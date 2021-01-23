@@ -108,13 +108,19 @@ function renderCircles(circlesGroup, newXScale, chosenXAxis) {
 d3.csv("assets/data/data.csv").then(function(allData, err) {
   
   if (err) throw err;
-
+  //console.log(allData);
   // parse data
   allData.forEach(function(d) {
+    // d.id = x.id
+    // console.log(d)
     d.poverty = +d.poverty;
     d.healthcare = +d.healthcare;
-    d.abbr = +d.abbr
-    d.age= +d.age;
+    // d.abbr = d.abbr;
+    // d.state= d.state;
+    //console.log(d.state, d.abbr);
+    // d = +x;
+    // console.log(d)
+
   });
 
   chosenXAxis = "poverty"
@@ -149,7 +155,7 @@ d3.csv("assets/data/data.csv").then(function(allData, err) {
     .attr("cy", d => yLinearScale(d[chosenYAxis]))
     .attr("r", 20)
     .attr("fill", "red")
-    .attr("opacity", "0.4")
+    .attr("opacity", "0.6")
 
   var circleLabelsGroup = chartGroup.selectAll(null)
     .data(allData)
@@ -164,7 +170,8 @@ d3.csv("assets/data/data.csv").then(function(allData, err) {
       return yLinearScale(d[chosenYAxis]) + 5;
     })
     .text(function(d) {
-      return d.state;
+      //  console.log(d.abbr)
+      return d.abbr;
     })
     .attr("font-family", "arial")
     .attr("font-size", "15px")
